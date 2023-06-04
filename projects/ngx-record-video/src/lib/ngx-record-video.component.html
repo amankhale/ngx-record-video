@@ -1,0 +1,55 @@
+<!-- Video Record Instruction -->
+<ng-container *ngIf="!(isRecordingCompleted | async); else completedRecording">
+  <video *ngIf="isCameraStarted | async" width="100%" #recorder src="" playsinline autoplay muted
+    oncontextmenu="return false;">
+    Your browser does not support the video tag.
+  </video>
+  <!-- <img *ngIf="!(isCameraStarted | async)" src="assets/images/dummy-video1.png" width="100%" alt="Dummy User"> -->
+
+  <div>
+
+    <div>
+      <button *ngIf="!(isCameraStarted | async)" (click)="getPermission()">
+        Start Camera
+      </button>
+    </div>
+
+    <div *ngIf="(isCameraStarted | async)">
+      <p *ngIf="(isRecording | async)">
+        {{timer}}
+        <span> sec</span>
+      </p>
+      <div>
+        <button *ngIf="!(isRecording | async) && (isCameraStarted | async)" (click)="startRecording()">
+          Start Recording
+        </button>
+        <button *ngIf="(isRecording | async)" (click)="stopRecording()">
+          Stop Recording
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<!--Play Introduction Video -->
+<ng-template #completedRecording>
+
+  <div>
+    <div>
+      <div>
+        <button [disabled]="disableRecordAgainBtn" (click)="recordAgain()">
+          Record Again
+        </button>
+        <button [disabled]="disableSubmitBtn" (click)="submit()">
+          Submit Video
+        </button>
+      </div>
+    </div>
+    <div>
+      <video width="100%" #recordedVideo src="" playsinline oncontextmenu="return false;"></video>
+      <div *ngIf="isVideoSubmitted && (videoDuration < 30000)">
+        <p>Introduction video should be of minimum 30 seconds</p>
+      </div>
+    </div>
+  </div>
+</ng-template>

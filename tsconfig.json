@@ -10,6 +10,13 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": false,
+    "paths": {
+      "ngx-record-video": [
+        "dist/ngx-record-video"
+      ]
+    },
+    "noUnusedParameters": false,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
