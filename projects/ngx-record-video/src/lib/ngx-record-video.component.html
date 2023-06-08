@@ -1,17 +1,14 @@
 <!-- Video Record Instruction -->
-<ng-container *ngIf="!(isRecordingCompleted | async); else completedRecording">
+<div class="video-recorder-container">
   <video *ngIf="isCameraStarted | async" width="100%" #recorder src="" playsinline autoplay muted
     oncontextmenu="return false;">
     Your browser does not support the video tag.
   </video>
   <!-- <img *ngIf="!(isCameraStarted | async)" src="assets/images/dummy-video1.png" width="100%" alt="Dummy User"> -->
 
-  <div>
-
+  <div class="button-container">
     <div>
-      <button *ngIf="!(isCameraStarted | async)" (click)="getPermission()">
-        Start Camera
-      </button>
+      <lib-button *ngIf="!(isCameraStarted | async)" label="Start Camera" (onClick)="getPermission()"></lib-button>
     </div>
 
     <div *ngIf="(isCameraStarted | async)">
@@ -20,16 +17,16 @@
         <span> sec</span>
       </p>
       <div>
-        <button *ngIf="!(isRecording | async) && (isCameraStarted | async)" (click)="startRecording()">
-          Start Recording
-        </button>
-        <button *ngIf="(isRecording | async)" (click)="stopRecording()">
-          Stop Recording
-        </button>
+        <lib-button *ngIf="!(isRecording | async) && (isCameraStarted | async)" (onClick)="startRecording()"
+          label="Start Recording">
+        </lib-button>
+
+        <lib-button *ngIf="(isRecording | async)" (onClick)="stopRecording()" label="Stop Recording">
+        </lib-button>
       </div>
     </div>
   </div>
-</ng-container>
+</div>
 
 <!--Play Introduction Video -->
 <ng-template #completedRecording>

@@ -56,7 +56,7 @@ export class NgxRecordVideoComponent {
   }
 
   ngOnInit(): void {
-    this.getPermission();
+    // this.getPermission();
   }
 
   /**
@@ -110,6 +110,7 @@ export class NgxRecordVideoComponent {
           this.recordedBlobs.push(event.data);
         }
         this.isRecordingCompleted.next(true);
+        this.isRecording.next(false);
         setTimeout(() => {
           this.playRecording(this.recordedBlobs);
         }, 1000);
@@ -157,9 +158,9 @@ export class NgxRecordVideoComponent {
     const superBuffer = new Blob(blob);
     this.videoDuration = performance.now() - this.startTime;
     this.patchedBlob = await this.patchBlob(superBuffer, this.videoDuration);
-    this.recordedVideo.nativeElement.srcObject = null;
-    this.recordedVideo.nativeElement.src = URL.createObjectURL(this.patchedBlob);
-    this.recordedVideo.nativeElement.controls = true;
+    this.videoRecorder.nativeElement.srcObject = null;
+    this.videoRecorder.nativeElement.src = URL.createObjectURL(this.patchedBlob);
+    this.videoRecorder.nativeElement.controls = true;
   }
 
   /**
